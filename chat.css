@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+body{
+    font-family: 'Comfortaa', cursive;
+    background-color: #efefef;
+}
+
+.peach-grad{
+    background: linear-gradient(40deg,#ffd86f,#fc6262) !important;
+}
+
+.blue-grad{background: linear-gradient(40deg,#45cafc, #45cafc) !important;}
+
+.h-100v{
+    height: 100vh;
+
+}
+.rounded-1r{
+        border-radius: 1.0rem!important;
+}
+.bg-grey{
+    background-color: #efefef;
+}
+.bg-white{
+    background-color: #fff;
+}
+.dis-flex{
+    display: flex;
+    
+}
+.flex-col{
+    flex-direction: column ;
+}
+.flex-row{
+    flex-direction: row;
+}
+
+.all-center {
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.y-center{
+    justify-content: center !important;
+}
+.border-left{
+    border-radius: 1rem 0rem 0rem 1rem;
+}
+.border-right{
+    border-radius: 0rem 1rem 1rem 0rem;
+}
+.rounded-left-2{
+    border-radius: 2rem 0rem 0rem 2rem;
+}
+.rounded-right-2{
+    border-radius: 0rem 2rem 2rem 0rem;
+}
+.h-navbar{
+    height:8vh;
+}
+
+.h-body{
+    height:79.5vh;
+}
+
+.rounded-top-br{
+    border-radius: 1rem 1rem 1rem 0rem;
+}
+
+.rounded-top-bl{
+    border-radius: 1rem 1rem 0rem 1rem;
+}
+.rounded-top-right{
+    border-radius: 0rem 1rem 0rem 0rem
+}
+
+.message{
+    background-color: #fff!important;
+}
+.bg-white{
+    background-color: #fff!important;
+}
+.bg-black{
+    background-color: black;
+}
+.overflow-y-scroll{
+    overflow-y: scroll;
+}

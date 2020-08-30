@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" media="screen" type="text/css" href="chat.css">
+
+    <title>CHAT APP</title>
+</head>
+<script>
+    var state= {
+        currentId: 1,
+        name: "Mansi Agarwal",
+        chats: [
+            {
+                id: 1,
+                rec: "Archit", msgs: [
+                    { time: "14.51", msg: "Hey", sent: true },
+                    { time: "14.50", msg: "Zoom?", sent: false },
+                    { time: "14.49", msg: "No", sent: true },
+                    { time: "14.48", msg: "Good", sent: true },
+                ],img: "https://tinyurl.com/yy876ydc"
+            },
+            {
+                id: 2,
+                rec: "Surbhi", msgs: [
+                    { time: "14.51", msg: "Homework?", sent: true },
+                    { time: "14.50", msg: "Yes", sent: false },
+                    { time: "14.49", msg: "How", sent: true },
+                    { time: "14.46", msg: "Done", sent: true },
+                ],img: "https://tinyurl.com/y3jpts53"
+            },
+            {
+                id: 3,
+                rec: "Dhruv", msgs: [
+                    { time: "14.51", msg: "Chocolate?", sent: true },
+                    { time: "14.50", msg: "Maybe", sent: false },
+                    { time: "14.49", msg: "Sure", sent: true },
+                    { time: "14.44", msg: "Ummm", sent: true },
+                ],img: "https://tinyurl.com/y54tuqku"
+            },
+            {
+                id: 4,
+                rec: "Sanjana", 
+                msgs: [
+                    { time: "14.51", msg: "Hi", sent: true },
+                    { time: "14.50", msg: "Hows you day?", sent: false },
+                    { time: "14.49", msg: "Wonderful", sent: true },
+                    { time: "14.42", msg: "All the best", sent: false  },
+                ],img: "https://tinyurl.com/y5rq88kz"
+            }
+        ]
+    }
+
+    function openChat(id) {
+        state.currentId = id;
+        var $chats = $("#msg")
+        $('#msg').empty()
+        msgs = state.chats[id - 1].msgs;
+        rec = state.chats[id - 1].rec;
+        img = state.chats[id - 1].img;
+        startRec = '<div class="mr-auto mt-2 px-4 py-2 rounded-top-br message shadow text-success bg-grey border-bottom">'
+        startSen = '<div class="ml-auto mt-2 px-4 py-2 rounded-top-bl message shadow text-primary bg-grey border-bottom">'
+        end = '</div>'
+        msgs.map(msg => {
+
+            if (msg.sent)
+                prt = startSen + msg.msg + end
+            else
+                prt = startRec + msg.msg + end
+            html = $.parseHTML(prt)
+            $chats.append(html)
+        })
+        $('#name').html(rec)
+        $('#dp').attr("src", img)
+        var objDiv = document.getElementById("msg");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
+    function loadChats(){
+        var node = document.getElementById("chats");
+        node.querySelectorAll('*').forEach(n => n.remove());
+        openChat(1)
+        var $chats = $("#chats");
+        navbar= '<div class="navbar navbar-default h-navbar px-2 navbar-expand-sm shadow-sm w-100 dis-flex flex-col all-center"><form action="" class="navbar-form" role="search"><div class="form-group input-group mb-0"><input type="text" placeholder="Search" class="form-control rounded-left-2"><div class="input-group-btn"><button type="submit" class="btn btn-primary rounded-right-2" aria-label="Left Align"><i class="fas fa-search"></i></button></div></div></form></div>'
+        start =  '<div class="w-100 dis-flex flex-row py-3 pr-4 border-bottom" onClick="openChat(';
+        mid1 = ')" id = "'
+        mid2 = '"><div class="col-3 dis-flex all-center"><img src=" " class="rounded-circle" style="height: 32px; width: 32px" /></div><div class="col-9 pr-0 dis-flex flex-col y-center"><div class="row dis-flex flex-row" ><div class="col-9 pl-0 h-100 dis-flex flex-col "><b>';
+        end = '</b ></div > <div class="col-3 pl-0 pr-2 h-100 dis-flex flex-col "><span>';
+        medEnd = '</span></div></div> <div class="row  dis-flex flex-row"><div class="col-12 h-100 px-0">';
+        mainEnd = '</div></div></div></div>';
+        $chats.append($.parseHTML(navbar))
+        var counter = 0;
+        while(counter <state.chats.length){
+            st = start + state.chats[counter].id + mid1 + state.chats[counter].id + mid2 + state.chats[counter].rec + end + state.chats[counter].msgs[state.chats[counter].msgs.length - 1].time + medEnd + state.chats[counter].msgs[state.chats[counter].msgs.length-1].msg + mainEnd;
+            
+            html = $.parseHTML(st)
+            $chats.append(html);
+            counter++;      
+        }
+    }
+    
+    function sendmessages(){
+        var send = document.getElementById("userinput").value;
+        var d = new Date("2015-03-25T12:00:00Z");
+        d = d.toString().slice(15, 21);
+        message = {
+            time: d, 
+            msg: send,
+            sent: true
+        }
+        this.state.chats[state.currentId-1].msgs.push(message)
+        document.getElementById("userinput").value=""
+        openChat(this.state.currentId)
+        loadChats()
+    }
+</script>
+<body onLoad="loadChats()" class="blue-grad">
+    <div class="container h-100v py-3"> 
+        <div class="row shadow h-100 rounded-1r bg-grey bg-white" >
+            <div class="col-3 h-100 dis-flex flex-col px-0 border-right" id="chats">
+                
+            </div>
+            <div class="col-9 h-100 border-right container-fluid px-0">
+                <nav class="navbar navbar-expand-sm shadow-sm w-100 h-navbar peach-grad rounded-top-right">
+
+                    <a class="navbar-brand"><img src="https://tinyurl.com/yy876ydc" class="rounded-circle" style="height: 40px; width: 40px" id="dp" /></a>
+                    <div class="col-9 pl-0 dis-flex flex-col">
+                        <b id="name">Archit</b>
+                    
+                    </div>
+                </nav>
+
+                <div class="container h-body dis-flex flex-col overflow-y-scroll py-2" id="msg">
+                </div>
+                <nav class="navbar navbar-expand-sm shadow-sm w-100 h-navbar">
+                    <form name="myform" class="navbar-form w-100" role="input" onsubmit="event.preventDefault(); sendmessages();">
+                        <div class="form-group input-group w-100">
+                            <input type="text" placeholder="Send Message" class="form-control rounded-left-2" id="userinput">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-primary rounded-right-2" aria-label="Left Align" >
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                    
+                        </div>
+                    </form>
+
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/084bddddfa.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
