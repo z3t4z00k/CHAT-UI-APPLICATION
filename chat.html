@@ -86,7 +86,6 @@
     function loadChats(){
         var node = document.getElementById("chats");
         node.querySelectorAll('*').forEach(n => n.remove());
-        openChat(1)
         var $chats = $("#chats");
         navbar= '<div class="navbar navbar-default h-navbar px-2 navbar-expand-sm shadow-sm w-100 dis-flex flex-col all-center"><form action="" class="navbar-form" role="search"><div class="form-group input-group mb-0"><input type="text" placeholder="Search" class="form-control rounded-left-2"><div class="input-group-btn"><button type="submit" class="btn btn-primary rounded-right-2" aria-label="Left Align"><i class="fas fa-search"></i></button></div></div></form></div>'
         start =  '<div class="w-100 dis-flex flex-row py-3 pr-4 border-bottom" onClick="openChat(';
